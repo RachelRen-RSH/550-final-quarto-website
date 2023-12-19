@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MUSA 550 Final Project - Hotels’ Christmas Holiday Price Prediction in Miami, FL</title>
+<title>MUSA 550 Final Project - Methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Methods.html">Methods</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -102,13 +102,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Methods.html" class="sidebar-item-text sidebar-link">
+  <a href="./Methods.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Methods</span></a>
   </div>
 </li>
@@ -157,17 +157,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#data-collection" id="toc-data-collection" class="nav-link active" data-scroll-target="#data-collection">Data Collection</a>
+  <ul class="collapse">
+  <li><a href="#web-scraping" id="toc-web-scraping" class="nav-link" data-scroll-target="#web-scraping">1. Web Scraping</a></li>
+  <li><a href="#google-geocoding-api" id="toc-google-geocoding-api" class="nav-link" data-scroll-target="#google-geocoding-api">2. Google Geocoding API</a></li>
+  <li><a href="#census-api" id="toc-census-api" class="nav-link" data-scroll-target="#census-api">3. Census API</a></li>
+  <li><a href="#arcgis-open-data" id="toc-arcgis-open-data" class="nav-link" data-scroll-target="#arcgis-open-data">4. ArcGIS Open Data</a></li>
+  </ul></li>
+  <li><a href="#data-visualization" id="toc-data-visualization" class="nav-link" data-scroll-target="#data-visualization">Data Visualization</a></li>
+  <li><a href="#regression-analysis" id="toc-regression-analysis" class="nav-link" data-scroll-target="#regression-analysis">Regression Analysis</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/RachelRen-RSH/550-final-quarto-website/blob/main/index.qmd" class="toc-action">View source</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/RachelRen-RSH/550-final-quarto-website/blob/main/Methods.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Hotels’ Christmas Holiday Price Prediction in Miami, FL</h1>
-<p class="subtitle lead">MUSA 550 Final Project by Jingyi Li, Sihan Ren, Sijia Zhang</p>
+<h1 class="title">Methods</h1>
 </div>
 
 
@@ -182,10 +189,37 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>Miami, Florida, a popular destination for Christmas and New Year’s celebrations, is famous for its pleasant climate and vibrant atmosphere. To enhance the experience of visitors to this tropical paradise, our team created an application to help tourists eliminate worries about choosing hotels, which can both save money and time. It is not only a travel companion, but also it’s a smart, personalized guide to ensuring a joyful and stress-free holiday experience in Miami’s festive ambiance.</p>
-<p>Our application offers two unique and attractive features. Firstly, we provide an in-depth analysis of the correlations between hotel holiday prices in 2023 and various factors such as their ratings, amenities, and the surrounding environment or demographics in Miami. This allows visitors to understand what influences the cost of their stay and whether there are some outliers that the price do not relates with the adjacent environment and amenities to help them make informed decisions. Secondly, our application creates a machine learning model with random forest regression to predict hotel holiday prices.</p>
+<p>Our application is constructed with Python and Jupyter notebook. The website is designed in Quarto, and it is published through Github pages. The whole process of developing the application is divided in three steps below.</p>
+<section id="data-collection" class="level2">
+<h2 class="anchored" data-anchor-id="data-collection">Data Collection</h2>
+<section id="web-scraping" class="level3">
+<h3 class="anchored" data-anchor-id="web-scraping">1. Web Scraping</h3>
+<p>To retrieve the hotel prices during the Christmas holiday season in Miami, we web-scraped Expedia.com, an official website of booking stays and flights, by selecting a one-night stay from December 24th to December 25th in 2023 with one traveler and one room. We used Selenium and BeautifulSoup to extract the information of hotel names, ratings, amenities, and prices from the HTML tags and classes and generated a dataframe with the cleaned data.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Expedia.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Expedia Query Result Screenshot</figcaption>
+</figure>
+</div>
+</section>
+<section id="google-geocoding-api" class="level3">
+<h3 class="anchored" data-anchor-id="google-geocoding-api">2. Google Geocoding API</h3>
+<p>Since the web-scraped results do not include specific addresses or coordinates of hotels, we used Google Geocoding API to geocode the addresses from the hotel names. Then we withdrawed the coordinates from the geocoding results and joined them by hotel names into the hotel’s dataframe to create a geodataframe with geometries.</p>
+</section>
+<section id="census-api" class="level3">
+<h3 class="anchored" data-anchor-id="census-api">3. Census API</h3>
+<p>It is possible that a hotel’s price is related with the wealth level of the belonged neighborhood. Therefore, we retrieved the median household income data by census tracts and joined it with the hotel dataframe.</p>
+</section>
+<section id="arcgis-open-data" class="level3">
+<h3 class="anchored" data-anchor-id="arcgis-open-data">4. ArcGIS Open Data</h3>
+<p>Spatial features of parks, shorelines, matro stations, trash complaints, abandoned cars and properties and sexual offenders are all retrieved from County of Miami-Dade ArcGIS Open Data Portal. We performed a nearest-neighborhood analysis to calculate the distance from each hotel to its nearest neighbor in the these datasets. We did a logarithm of the distances to normalize the distribution of distance values.</p>
+</section>
+</section>
+<section id="data-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization">Data Visualization</h2>
+</section>
+<section id="regression-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="regression-analysis">Regression Analysis</h2>
 
 
 </section>

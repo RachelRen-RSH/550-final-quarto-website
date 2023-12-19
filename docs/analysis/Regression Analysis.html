@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MUSA 550 Quarto Template - Interactive Maps with Folium</title>
+<title>MUSA 550 Final Project - Regression Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,10 +68,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -100,7 +100,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/index.html">Analysis</a></li><li class="breadcrumb-item"><a href="../analysis/4-folium.html">Interactive Maps with Folium</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/Data Visualizations.html">Results</a></li><li class="breadcrumb-item"><a href="../analysis/Regression Analysis.html">Regression Analysis</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -121,15 +121,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-center sidebar-header">
       <a href="../index.html" class="sidebar-logo-link">
-      <img src="../images/course-icon.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <img src="../images/Miami_beach_1.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
-      <div class="sidebar-tools-main tools-wide">
-    <a href="https://nickhand.dev" rel="" title="Personal Website" class="quarto-navigation-tool px-1" aria-label="Personal Website"><i class="bi bi-globe"></i></a>
-    <a href="https://github.com/MUSA-550-Fall-2023/" rel="" title="MUSA 550 GitHub" class="quarto-navigation-tool px-1" aria-label="MUSA 550 GitHub"><i class="bi bi-github"></i></a>
-    <a href="https://twitter.com/nicholashand" rel="" title="Nick Hand Twitter" class="quarto-navigation-tool px-1" aria-label="Nick Hand Twitter"><i class="bi bi-twitter"></i></a>
+      <div class="sidebar-tools-main">
+    <a href="https://catalog.upenn.edu/graduate/programs/urban-spatial-analytics-musa/" rel="" title="MUSA Website" class="quarto-navigation-tool px-1" aria-label="MUSA Website"><i class="bi bi-globe"></i></a>
 </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -142,19 +140,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Welcome</span></a>
+ <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../about.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">About me</span></a>
+  <a href="../Methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Methods</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../analysis/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Analysis</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Results</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -162,30 +160,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/1-python-code-blocks.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Python code blocks</span></a>
+  <a href="../analysis/Data Visualizations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Visualizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../analysis/2-static-images.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Showing static visualizations</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/3-altair-hvplot.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Altair and Hvplot Charts</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../analysis/4-folium.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Interactive Maps with Folium</span></a>
+  <a href="../analysis/Regression Analysis.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Regression Analysis</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Limitations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Limitations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -199,14 +197,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#finding-the-shortest-route" id="toc-finding-the-shortest-route" class="nav-link active" data-scroll-target="#finding-the-shortest-route">Finding the shortest route</a></li>
   <li><a href="#examining-trash-related-311-requests" id="toc-examining-trash-related-311-requests" class="nav-link" data-scroll-target="#examining-trash-related-311-requests">Examining Trash-Related 311 Requests</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/MUSA-550-Fall-2023/quarto-website-template/blob/main/analysis/4-folium.ipynb" class="toc-action">View source</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/RachelRen-RSH/550-final-quarto-website/blob/main/analysis/Regression Analysis.ipynb" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Interactive Maps with Folium</h1>
+<h1 class="title">Regression Analysis</h1>
 </div>
 
 
@@ -237,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>art_museum.geometry</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-<p><img src="4-folium_files/figure-html/cell-5-output-1.svg" class="img-fluid"></p>
+<p><img src="Regression Analysis_files/figure-html/cell-5-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
 <div class="cell" data-slideshow="{&quot;slide_type&quot;:&quot;subslide&quot;}">
@@ -245,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>liberty_bell.geometry</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-<p><img src="4-folium_files/figure-html/cell-6-output-1.svg" class="img-fluid"></p>
+<p><img src="Regression Analysis_files/figure-html/cell-6-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
 <p>Now, extract the lat and lng coordinates</p>
@@ -508,7 +506,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>greenwich_geo.squeeze().geometry</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
-<p><img src="4-folium_files/figure-html/cell-16-output-1.svg" class="img-fluid"></p>
+<p><img src="Regression Analysis_files/figure-html/cell-16-output-1.svg" class="img-fluid"></p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1072,7 +1070,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">© CC-Nick Hand, 2023</div>   
+    <div class="nav-footer-left">© CC-Sihan Ren, 2023</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>

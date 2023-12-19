@@ -1,0 +1,14 @@
+---
+title: "Limitations"
+---
+
+
+Although our application performs a reliable prediction for tourists, there are still several limitations that we can improve in the future. 
+
+1. There are only 100 results to scrape available in Expedia so that the sample size is small. The number of available hotels and hotel prices vary in real time based on the bookings. Since we web-scraped the lists of the available hotels, we did not get to the website of each hotel with more detailed information. If we could, there would be more internal features as predictors in the regression model.
+
+2. The Miami-Dade Open Data Hub has limited resources. We supposed to find the crime data as a predictor, but there is no available public dataset for us to use. The datasets for transportation type are also limited. Since Miami and adjacent cities have trolley lines, we did not find datasets for trolley stops. 
+
+
+
+

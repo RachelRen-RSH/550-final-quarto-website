@@ -1,0 +1,15 @@
+---
+title: "References"
+---
+
+## Data:
+- [County of Miami-Dade Open Data Hub](https://gis-mdc.opendata.arcgis.com/)
+- [United States Census Bureau](https://data.census.gov/)
+
+## Tutorials and Other coding resources:
+- [Scrape Expedia](https://www.scrapingdog.com/blog/scrape-expedia/)
+- [Google Maps Platform Geocoding API](https://developers.google.com/maps/documentation/geocoding)
+
+
+
+
