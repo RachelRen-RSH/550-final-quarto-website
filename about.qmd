@@ -1,5 +1,5 @@
 ---
-title: "About me"
+title: "Methods"
 ---
 
 <!-- Use a grid -->
