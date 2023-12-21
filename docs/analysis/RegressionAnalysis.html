@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>MUSA 550 Final Project - Regression Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../analysis/Exploratory_Analysis.html">Results</a></li><li class="breadcrumb-item"><a href="../analysis/RegressionAnalysis.html">Regression Analysis</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../images/Miami_beach_1.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+    <a href="https://catalog.upenn.edu/graduate/programs/urban-spatial-analytics-musa/" rel="" title="MUSA Website" class="quarto-navigation-tool px-1" aria-label="MUSA Website"><i class="bi bi-globe"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Methods</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Results</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/Exploratory_Analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Visualizations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../analysis/RegressionAnalysis.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Regression Analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Limitations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Limitations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page-right" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Regression Analysis</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>We created a list containing the column names we want to keep,including the price of hotels, rating of hotels on Expedia, mdeian household income of census tract, hotel’s logged distance to parks, logged distance to metro stations, logged distance to 311 calls of transhes and abandoned cars, logged distance to offenders and logged distance to shoreline, amenities of hotels and census tract of where the hotel locates. These columns will be the data prepared for our prediction model. And then we use this list to select the specified columns along with the ‘geometry’ column from the hotels_census_cleaned DataFrame. In order to avoid outliers that decrease the predicting capability of our model, we filerted out extremely expensive hotel prices and negative median household income values.</p>
+<p>We plot a correlation matrix plot using heatmap to study the intercorrelation of all variables. According to the plot, the dependent variable of price is most related with median household income (0.43) of the tract, followed by the logged distance to offenders (0.38). Logged distances to shorelines (-0.33) and logged distances to parks (-0.4) are negatively related with the hotel price. This result is out of expectation, for we assume the major reason that people visiting Miami is for enjoying the beaches. Some predicters are highly correlated as well, for example the logged distances to parks and logged distances to shorelines has a correlation of 0.65, logged distances to trashes and logged distances to abandoned cars has correlation of 0.6.</p>
+<div class="cell" data-tags="[]" data-execution_count="23">
+<div class="cell-output cell-output-display">
+<p><img src="RegressionAnalysis_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>We categorized the columns we selected previously into numerical and categorical columns. Numerical columns include rating, MedHHInc, logDistParks, logDistMetro, logDistTrash, logDistAbandoned, logDistOffender, and logDistShoreline. For categorical columns we only choose the census tract. To process the two distinct categories of column, we used two different methods. We use StandardScaler() to standardize (scale to mean=0 and variance=1) the numerical columns specified in the list num_cols. This is commonly done to ensure that numerical features are on a similar scale, which is important for many machine learning algorithms. We use OneHotEncoder to perform one-hot encoding on the categorical columns specified in the list cat_cols. One-hot encoding converts categorical variables into binary vectors, making them suitable for machine learning algorithms that require numerical input. The handle_unknown=“ignore” parameter is used to handle unknown categories that may appear in the test data. If a new category is encountered during the transformation of the test data, it will be ignored rather than raising an error.</p>
+<p>We create a scikit-learn pipeline out of processed data from the previous steps and fed the data into the RandomForestRegressor for training or prediction. The RandomForestRegressor is a machine learning model from the scikit-learn library. In our case, it’s configured to use 10 decision trees (n_estimators=10) and a fixed random state (random_state=42) for reproducibility. After that we split the data in to 30/70 for testing/training and logged our hotel price. Finally, fitting a model on the training set and then calculate the score on the test set. Our final output score for the test set is around 0.45. This result indicates that our model is not a very predictive model, it can only predict 45% of the hotel prices in the testing set based on our predictors.</p>
+<div class="cell" data-tags="[]" data-execution_count="42">
+<div class="cell-output cell-output-display" data-execution_count="42">
+<pre><code>0.4513026136517557</code></pre>
+</div>
+</div>
+<p>To assess the error of our prediction, we exponentiated the logged hotel price back and rerun the regression to get the predicted price of hotels. The error of prediction percentage is calculated using (predicted price – actual price)/ actual price* 100.</p>
+<p>To better interpretate our errors, we plot a scatterplot. Most points of the price are clustered around the prediction line, only two out obvious outliers. One we predict to have a price exceeding $400, but the actual price is only around $150. Another hotel price we predict to be only $400, but the actual price is nearly $700.</p>
+<div class="cell" data-tags="[]" data-execution_count="31">
+<div class="cell-output cell-output-display" data-execution_count="31">
+
+<style>
+  #altair-viz-e6398ad1418d4ecd98c429b934389b0b.vega-embed {
+    width: 100%;
+    display: flex;
+  }
+
+  #altair-viz-e6398ad1418d4ecd98c429b934389b0b.vega-embed details,
+  #altair-viz-e6398ad1418d4ecd98c429b934389b0b.vega-embed details summary {
+    position: relative;
+  }
+</style>
+<div id="altair-viz-e6398ad1418d4ecd98c429b934389b0b"></div>
+<script type="text/javascript">
+  var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-e6398ad1418d4ecd98c429b934389b0b") {
+      outputDiv = document.getElementById("altair-viz-e6398ad1418d4ecd98c429b934389b0b");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm/vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm/vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm/vega-lite@5.14.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm/vega-embed@6?noext",
+    };
+
+    function maybeLoadScript(lib, version) {
+      var key = `${lib.replace("-", "")}_version`;
+      return (VEGA_DEBUG[key] == version) ?
+        Promise.resolve(paths[lib]) :
+        new Promise(function(resolve, reject) {
+          var s = document.createElement('script');
+          document.getElementsByTagName("head")[0].appendChild(s);
+          s.async = true;
+          s.onload = () => {
+            VEGA_DEBUG[key] = version;
+            return resolve(paths[lib]);
+          };
+          s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+          s.src = paths[lib];
+        });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else {
+      maybeLoadScript("vega", "5")
+        .then(() => maybeLoadScript("vega-lite", "5.14.1"))
+        .then(() => maybeLoadScript("vega-embed", "6"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300}}, "layer": [{"data": {"name": "data-6769fdcfe5b58bfbad38c0304df09a87"}, "mark": {"type": "point"}, "encoding": {"tooltip": [{"field": "price", "type": "quantitative"}, {"field": "prediction", "type": "quantitative"}, {"field": "Percent_Error", "type": "quantitative"}], "x": {"field": "price", "type": "quantitative"}, "y": {"field": "prediction", "type": "quantitative"}}, "name": "view_2"}, {"data": {"name": "data-051411d309ecba05270cc86fc568f682"}, "mark": {"type": "line", "color": "red"}, "encoding": {"x": {"field": "price", "type": "quantitative"}, "y": {"field": "prediction", "type": "quantitative"}}}], "params": [{"name": "param_2", "select": {"type": "interval", "encodings": ["x", "y"]}, "bind": "scales", "views": ["view_2"]}], "$schema": "https://vega.github.io/schema/vega-lite/v5.14.1.json", "datasets": {"data-6769fdcfe5b58bfbad38c0304df09a87": [{"name": "Motel 6 Miami, FL", "general_location": "Miami", "amenities": "", "rating": 7.0, "price": 101, "Latitude": 25.8087841, "Longitude": -80.3161228, "TRACTCE": "009102", "GEOID": "12086009102", "MedHHInc": 41823.0, "state": "12", "county": "086", "logDistParks": 3.1875226415708666, "logDistMetro": 3.61961645459765, "logDistTrash": 3.178982906296306, "logDistAbandoned": 2.773981629660568, "logDistOffender": 3.3878695989374235, "logDistShoreline": 3.916725755438986, "Percent_Error": 34.85148514851484, "prediction": 136.2, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8940749.89258603, 2975417.245530603]}}, {"name": "Holiday Inn Miami - International Airport, an IHG Hotel", "general_location": "Miami Springs", "amenities": "Pool", "rating": 7.8, "price": 128, "Latitude": 25.8091518, "Longitude": -80.26358979999999, "TRACTCE": "004703", "GEOID": "12086004703", "MedHHInc": 69881.0, "state": "12", "county": "086", "logDistParks": 2.4880429459020665, "logDistMetro": 3.1834619092138174, "logDistTrash": 3.2488097795947395, "logDistAbandoned": 2.7821122233238795, "logDistOffender": 2.9839054439885575, "logDistShoreline": 3.4526576626327827, "Percent_Error": 25.234375000000007, "prediction": 160.3, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8934901.945776185, 2975462.7130649113]}}, {"name": "Hilton Garden Inn Miami Dolphin Mall", "general_location": "Miami", "amenities": "Pool", "rating": 8.8, "price": 148, "Latitude": 25.7894489, "Longitude": -80.37590680000001, "TRACTCE": "009010", "GEOID": "12086009010", "MedHHInc": 82232.0, "state": "12", "county": "086", "logDistParks": 3.379147293309743, "logDistMetro": 3.9466998426715265, "logDistTrash": 3.297035944437546, "logDistAbandoned": 3.3735389153486937, "logDistOffender": 3.2820358780065173, "logDistShoreline": 4.16763486157598, "Percent_Error": 98.71621621621624, "prediction": 294.1, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8947405.017023616, 2973026.5716297915]}}, {"name": "Loews Coral Gables Hotel", "general_location": "Coral Gables", "amenities": "Pool", "rating": 9.4, "price": 332, "Latitude": 25.7447406, "Longitude": -80.2574254, "TRACTCE": "006203", "GEOID": "12086006203", "MedHHInc": 82500.0, "state": "12", "county": "086", "logDistParks": 2.3021831158084454, "logDistMetro": 3.178386987603802, "logDistTrash": 3.2400642247942733, "logDistAbandoned": 3.2089677688875176, "logDistOffender": 3.086380106801118, "logDistShoreline": 3.4571083491431605, "Percent_Error": -29.668674698795183, "prediction": 233.5, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8934215.727907142, 2967500.1680939426]}}, {"name": "The Ritz-Carlton Key Biscayne, Miami", "general_location": "Key Biscayne", "amenities": "Pool", "rating": 9.2, "price": 668, "Latitude": 25.6915779, "Longitude": -80.1579217, "TRACTCE": "004607", "GEOID": "12086004607", "MedHHInc": 160368.0, "state": "12", "county": "086", "logDistParks": 2.4934916423951043, "logDistMetro": 3.9710243844037776, "logDistTrash": 4.098275316217463, "logDistAbandoned": 4.011869928266035, "logDistOffender": 3.891920757648321, "logDistShoreline": 2.8957798979495255, "Percent_Error": -39.79041916167665, "prediction": 402.2, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8923139.026691094, 2960931.419816107]}}, {"name": "Hilton Cabana Miami Beach Resort", "general_location": "Mid Beach", "amenities": "Pool", "rating": 7.0, "price": 291, "Latitude": 25.8441522, "Longitude": -80.1205992, "TRACTCE": "003921", "GEOID": "12086003921", "MedHHInc": 90571.0, "state": "12", "county": "086", "logDistParks": 2.39761892904678, "logDistMetro": 4.05821413930681, "logDistTrash": 3.7912753505966297, "logDistAbandoned": 3.564767331703346, "logDistOffender": 3.285890297034801, "logDistShoreline": 2.185700630090214, "Percent_Error": 37.216494845360835, "prediction": 399.3, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8918984.304995961, 2979791.294985119]}}, {"name": "YVE Hotel Miami", "general_location": "Downtown Miami", "amenities": "", "rating": 7.2, "price": 193, "Latitude": 25.7760686, "Longitude": -80.1882174, "TRACTCE": "003704", "GEOID": "12086003704", "MedHHInc": 66711.0, "state": "12", "county": "086", "logDistParks": 2.3658840781576123, "logDistMetro": 2.9432873512049276, "logDistTrash": 3.8158009106073876, "logDistAbandoned": 3.1396589919620106, "logDistOffender": 3.209158231960574, "logDistShoreline": 2.5302931252768923, "Percent_Error": 28.03108808290155, "prediction": 247.1, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8926511.52858832, 2971372.4112814018]}}, {"name": "Element Miami International Airport", "general_location": "Miami", "amenities": "Breakfast included; Pool", "rating": 8.0, "price": 162, "Latitude": 25.7994082, "Longitude": -80.2536571, "TRACTCE": "980500", "GEOID": "12086980500", "MedHHInc": 57500.0, "state": "12", "county": "086", "logDistParks": 3.1105971334525684, "logDistMetro": 2.8339672389326727, "logDistTrash": 2.902836833044208, "logDistAbandoned": 2.7242007612521997, "logDistOffender": 2.9318328492956334, "logDistShoreline": 3.096825060382608, "Percent_Error": -15.86419753086419, "prediction": 136.3, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8933796.242669985, 2974257.9267162667]}}, {"name": "La Quinta Inn & Suites by Wyndham Miami Airport West", "general_location": "Doral", "amenities": "Breakfast included", "rating": 7.6, "price": 132, "Latitude": 25.799403, "Longitude": -80.3386613, "TRACTCE": "009010", "GEOID": "12086009010", "MedHHInc": 82232.0, "state": "12", "county": "086", "logDistParks": 2.692087206121281, "logDistMetro": 3.755058196343341, "logDistTrash": 3.11992421111339, "logDistAbandoned": 3.382964837151635, "logDistOffender": 3.3663935562536738, "logDistShoreline": 4.025293634894884, "Percent_Error": 13.560606060606043, "prediction": 149.89999999999998, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8943258.866929272, 2974257.2837679377]}}, {"name": "Four Points by Sheraton Miami Airport", "general_location": "Miami", "amenities": "Pool", "rating": 8.2, "price": 134, "Latitude": 25.8086302, "Longitude": -80.3190118, "TRACTCE": "009102", "GEOID": "12086009102", "MedHHInc": 41823.0, "state": "12", "county": "086", "logDistParks": 3.269981661081169, "logDistMetro": 3.635212606114796, "logDistTrash": 3.0904621731888495, "logDistAbandoned": 2.7885991836016752, "logDistOffender": 3.3943582852125966, "logDistShoreline": 3.932793011768298, "Percent_Error": -4.701492537313431, "prediction": 127.7, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8941071.49459493, 2975398.2152392603]}}, {"name": "Residence Inn by Marriott Miami Aventura Mall", "general_location": "Aventura", "amenities": "Breakfast included; Pool", "rating": 9.0, "price": 338, "Latitude": 25.9596644, "Longitude": -80.1398713, "TRACTCE": "000134", "GEOID": "12086000134", "MedHHInc": 37528.0, "state": "12", "county": "086", "logDistParks": 1.9261079089151338, "logDistMetro": 4.269242650275163, "logDistTrash": 3.0477066228658938, "logDistAbandoned": 3.1417044050041034, "logDistOffender": 3.283920419782957, "logDistShoreline": 3.1209368477162154, "Percent_Error": 18.668639053254445, "prediction": 401.1, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8921129.665354477, 2994086.0637703277]}}, {"name": "Hotel Croydon, a South Beach Group Hotel", "general_location": "Mid Beach", "amenities": "Pool", "rating": 8.4, "price": 151, "Latitude": 25.8109048, "Longitude": -80.1235126, "TRACTCE": "004103", "GEOID": "12086004103", "MedHHInc": 38423.0, "state": "12", "county": "086", "logDistParks": 2.3662945557796715, "logDistMetro": 3.9496300344973045, "logDistTrash": 3.905297745002261, "logDistAbandoned": 3.7517875775546545, "logDistOffender": 3.5051316258384633, "logDistShoreline": 2.4422653119306794, "Percent_Error": 181.19205298013244, "prediction": 424.6, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8919308.623200439, 2975679.480269221]}}, {"name": "Eden Roc Miami Beach", "general_location": "Mid Beach", "amenities": "Pool", "rating": 7.8, "price": 461, "Latitude": 25.8195246, "Longitude": -80.1219038, "TRACTCE": "003919", "GEOID": "12086003919", "MedHHInc": 109063.0, "state": "12", "county": "086", "logDistParks": 2.24378468575326, "logDistMetro": 3.9801170020068777, "logDistTrash": 3.8728058990260195, "logDistAbandoned": 3.717768243247778, "logDistOffender": 3.55224303361055, "logDistShoreline": 2.444772279981696, "Percent_Error": -2.9934924078091134, "prediction": 447.2, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8919129.532403652, 2976745.4082561736]}}, {"name": "Yotel Miami", "general_location": "Downtown Miami", "amenities": "Pool", "rating": 8.0, "price": 183, "Latitude": 25.7762606, "Longitude": -80.1897584, "TRACTCE": "003707", "GEOID": "12086003707", "MedHHInc": 83065.0, "state": "12", "county": "086", "logDistParks": 2.6074910618935925, "logDistMetro": 2.849140467031245, "logDistTrash": 3.806655375897499, "logDistAbandoned": 3.0858458666238406, "logDistOffender": 3.1691327775202596, "logDistShoreline": 2.6633058029708367, "Percent_Error": -12.45901639344263, "prediction": 160.2, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8926683.071923632, 2971396.1462598704]}}, {"name": "Comfort Suites Miami Airport North", "general_location": "Miami Springs", "amenities": "Breakfast included; Pool", "rating": 7.8, "price": 132, "Latitude": 25.8089179, "Longitude": -80.2750586, "TRACTCE": "004703", "GEOID": "12086004703", "MedHHInc": 69881.0, "state": "12", "county": "086", "logDistParks": 2.743795617176418, "logDistMetro": 3.352660232377771, "logDistTrash": 3.463339401117349, "logDistAbandoned": 3.2732835631993336, "logDistOffender": 3.110900705565625, "logDistShoreline": 3.5917915269601255, "Percent_Error": 0.6818181818181861, "prediction": 132.9, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8936178.646752195, 2975433.7904043733]}}, {"name": "citizenM Miami Worldcenter", "general_location": "Downtown Miami", "amenities": "Pool", "rating": 9.2, "price": 144, "Latitude": 25.7811375, "Longitude": -80.19065479999999, "TRACTCE": "003710", "GEOID": "12086003710", "MedHHInc": 89975.0, "state": "12", "county": "086", "logDistParks": 2.7812985427605823, "logDistMetro": 2.797231730686157, "logDistTrash": 3.7717033444535533, "logDistAbandoned": 3.069058604119449, "logDistOffender": 3.100535805329746, "logDistShoreline": 2.730000501410427, "Percent_Error": 47.91666666666667, "prediction": 213.0, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8926782.858715177, 2971999.039954259]}}, {"name": "Miami International Airport Hotel", "general_location": "Miami", "amenities": "", "rating": 6.6, "price": 182, "Latitude": 25.7951459, "Longitude": -80.27950919999999, "TRACTCE": "980500", "GEOID": "12086980500", "MedHHInc": 57500.0, "state": "12", "county": "086", "logDistParks": 3.299758235918163, "logDistMetro": 3.3539552152633605, "logDistTrash": 3.540446189096778, "logDistAbandoned": 3.4421162558026306, "logDistOffender": 3.3499816817582198, "logDistShoreline": 3.6021473428490327, "Percent_Error": -38.51648351648351, "prediction": 111.9, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8936674.08527792, 2973730.928745227]}}, {"name": "Holiday Inn Port of Miami - Downtown, an IHG Hotel", "general_location": "Downtown Miami", "amenities": "", "rating": 7.2, "price": 163, "Latitude": 25.777833, "Longitude": -80.18882800000002, "TRACTCE": "003707", "GEOID": "12086003707", "MedHHInc": 83065.0, "state": "12", "county": "086", "logDistParks": 2.6010120235959815, "logDistMetro": 2.9239230095263617, "logDistTrash": 3.8021640069989706, "logDistAbandoned": 3.1127915567534594, "logDistOffender": 3.181347414575214, "logDistShoreline": 2.4768207800930937, "Percent_Error": 13.619631901840517, "prediction": 185.20000000000005, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8926579.5002694, 2971590.527289293]}}, {"name": "Hilton Garden Inn Miami Airport West", "general_location": "Miami", "amenities": "Pool", "rating": 8.4, "price": 127, "Latitude": 25.8078502, "Longitude": -80.318293, "TRACTCE": "009102", "GEOID": "12086009102", "MedHHInc": 41823.0, "state": "12", "county": "086", "logDistParks": 3.2522880851768687, "logDistMetro": 3.6403796343708037, "logDistTrash": 3.1271258211112727, "logDistAbandoned": 2.8260815124540906, "logDistOffender": 3.4004494164332497, "logDistShoreline": 3.927842368294657, "Percent_Error": 6.5354330708661506, "prediction": 135.3, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8940991.47814495, 2975301.7657997236]}}, {"name": "Comfort Inn & Suites Miami International Airport", "general_location": "Miami Springs", "amenities": "Breakfast included; Pool", "rating": 8.2, "price": 176, "Latitude": 25.8087269, "Longitude": -80.27373419999999, "TRACTCE": "004703", "GEOID": "12086004703", "MedHHInc": 69881.0, "state": "12", "county": "086", "logDistParks": 2.699275869087047, "logDistMetro": 3.3272719359700305, "logDistTrash": 3.4447715976790203, "logDistAbandoned": 3.238330497926597, "logDistOffender": 3.091660985243667, "logDistShoreline": 3.5756581567517753, "Percent_Error": -23.69318181818181, "prediction": 134.3, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8936031.215218589, 2975410.172540941]}}, {"name": "EVEN Hotel Miami - Airport, an IHG Hotel", "general_location": "Miami", "amenities": "Pool", "rating": 7.8, "price": 118, "Latitude": 25.7993694, "Longitude": -80.2522831, "TRACTCE": "980500", "GEOID": "12086980500", "MedHHInc": 57500.0, "state": "12", "county": "086", "logDistParks": 3.074159942562016, "logDistMetro": 2.916620258401785, "logDistTrash": 2.8416591115421714, "logDistAbandoned": 2.6058069125647814, "logDistOffender": 2.8780213069140985, "logDistShoreline": 3.0461040392793506, "Percent_Error": 1.1016949152542348, "prediction": 119.3, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8933643.289689634, 2974253.129333265]}}, {"name": "The Confidante Miami Beach, part of Hyatt", "general_location": "Mid Beach", "amenities": "Pool", "rating": 8.4, "price": 274, "Latitude": 25.8127365, "Longitude": -80.1226222, "TRACTCE": "004103", "GEOID": "12086004103", "MedHHInc": 38423.0, "state": "12", "county": "086", "logDistParks": 2.6341935149716194, "logDistMetro": 3.9585943005801028, "logDistTrash": 3.9005250604194455, "logDistAbandoned": 3.746002178199713, "logDistOffender": 3.523157389043869, "logDistShoreline": 2.27741446001189, "Percent_Error": 31.31386861313869, "prediction": 359.8, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8919209.504325837, 2975905.9825484753]}}, {"name": "Hampton Inn & Suites Miami-Airport South-Blue Lagoon", "general_location": "Miami", "amenities": "Breakfast included; Pool", "rating": 9.0, "price": 198, "Latitude": 25.779042, "Longitude": -80.2880457, "TRACTCE": "005706", "GEOID": "12086005706", "MedHHInc": 47901.0, "state": "12", "county": "086", "logDistParks": 3.0067095924890963, "logDistMetro": 3.593013763205877, "logDistTrash": 3.4415199851836222, "logDistAbandoned": 3.464476563467535, "logDistOffender": 2.9243577292977547, "logDistShoreline": 3.7265895738044064, "Percent_Error": -12.979797979797974, "prediction": 172.3, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8937624.364111077, 2971739.9863450946]}}, {"name": "Oceanside Hotel and Suites, a South Beach Group Hotel", "general_location": "Mid Beach", "amenities": "Pool", "rating": 6.4, "price": 95, "Latitude": 25.7826123, "Longitude": -80.1340772, "TRACTCE": "004303", "GEOID": "12086004303", "MedHHInc": 48920.0, "state": "12", "county": "086", "logDistParks": 2.5910481860779453, "logDistMetro": 3.840593815482653, "logDistTrash": 4.010409040513775, "logDistAbandoned": 3.7663369333101158, "logDistOffender": 3.152222894401066, "logDistShoreline": 3.040023635400196, "Percent_Error": 58.94736842105262, "prediction": 151.0, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8920484.669092873, 2972181.3630333943]}}, {"name": "Hilton Miami Airport Blue Lagoon", "general_location": "Miami", "amenities": "Pool", "rating": 7.6, "price": 209, "Latitude": 25.7819729, "Longitude": -80.2786043, "TRACTCE": "980500", "GEOID": "12086980500", "MedHHInc": 57500.0, "state": "12", "county": "086", "logDistParks": 2.563706562639564, "logDistMetro": 3.457634244478159, "logDistTrash": 3.42709990229144, "logDistAbandoned": 3.5062157613698077, "logDistOffender": 3.039852830146028, "logDistShoreline": 3.625119010506201, "Percent_Error": -27.607655502392337, "prediction": 151.3, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8936573.352270702, 2972102.316527214]}}, {"name": "Hotel AKA Brickell", "general_location": "Brickell", "amenities": "Pool", "rating": 9.4, "price": 323, "Latitude": 25.7604352, "Longitude": -80.1916854, "TRACTCE": "006713", "GEOID": "12086006713", "MedHHInc": 101586.0, "state": "12", "county": "086", "logDistParks": 2.697902396859807, "logDistMetro": 2.7736394068121353, "logDistTrash": 3.879323106249863, "logDistAbandoned": 3.3613767844236504, "logDistOffender": 3.2267567792590786, "logDistShoreline": 2.867464901827526, "Percent_Error": -25.325077399380806, "prediction": 241.2, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8926897.58458239, 2969439.944233675]}}, {"name": "Sentral Wynwood", "general_location": "Wynwood Art District", "amenities": "Pool", "rating": 9.2, "price": 247, "Latitude": 25.8016794, "Longitude": -80.19615809999999, "TRACTCE": "002800", "GEOID": "12086002800", "MedHHInc": 30701.0, "state": "12", "county": "086", "logDistParks": 2.9449839371648294, "logDistMetro": 3.3505087215205145, "logDistTrash": 3.6017848175478817, "logDistAbandoned": 3.473031736312712, "logDistOffender": 3.034545248702083, "logDistShoreline": 3.070857717973136, "Percent_Error": -22.672064777327936, "prediction": 191.0, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8927395.48326886, 2974538.749459927]}}, {"name": "Courtyard by Marriott Miami West/ FL Turnpike", "general_location": "Miami", "amenities": "Pool", "rating": 8.6, "price": 158, "Latitude": 25.8690804, "Longitude": -80.3837693, "TRACTCE": "009040", "GEOID": "12086009040", "MedHHInc": 78889.0, "state": "12", "county": "086", "logDistParks": 3.5000291203586795, "logDistMetro": 3.8691198753710463, "logDistTrash": 3.290539862921599, "logDistAbandoned": 3.80547464641346, "logDistOffender": 3.625196235054158, "logDistShoreline": 4.2307865378183, "Percent_Error": 13.734177215189867, "prediction": 179.7, "type": "Feature", "geometry": {"type": "Point", "coordinates": [-8948280.266519977, 2982875.0051287194]}}], "data-051411d309ecba05270cc86fc568f682": [{"price": 0, "prediction": 0}, {"price": 668, "prediction": 668}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+<p>We also created a map with errors to help understanding the relationship with location and error in prediction. As from the graph, the hotels in downtown have lower error, but hotels by the beach showed significantly difference from the predicted values.</p>
+<div class="cell" data-tags="[]" data-execution_count="32">
+<div class="cell-output cell-output-display">
+<p><img src="RegressionAnalysis_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>An importance barplot is created to visualize the importance of each selected predictor to the hotel price. In numerical predictors, distance to metro station is the most crucial to influence hotel prices and distance to trash is the least important. For categorical predictors of census tracts, they do not vary much, all have little importance to the hotel prices.</p>
+<div class="cell" data-tags="[]" data-execution_count="43">
+<div class="cell-output cell-output-display">
+
+</div>
+<div class="cell-output cell-output-display" data-execution_count="43">
+<div id="p1118">
+  <div id="bc443a8d-7a6e-469d-b41a-b49fe5d8ae5f" data-root-id="p1118" style="display: contents;"></div>
+</div>
+<script type="application/javascript">(function(root) {
+  var docs_json = {"bb111862-7883-49fb-af99-84a49d986a62":{"version":"3.2.1","title":"Bokeh Application","roots":[{"type":"object","name":"Row","id":"p1118","attributes":{"name":"Row01177","tags":["embedded"],"stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"type":"object","name":"ImportedStyleSheet","id":"p1121","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/css/loading.css"}},{"type":"object","name":"ImportedStyleSheet","id":"p1173","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/css/listpanel.css"}},{"type":"object","name":"ImportedStyleSheet","id":"p1119","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/bundled/theme/default.css"}},{"type":"object","name":"ImportedStyleSheet","id":"p1120","attributes":{"url":"https://cdn.holoviz.org/panel/1.2.1/dist/bundled/theme/native.css"}}],"min_width":700,"margin":0,"sizing_mode":"stretch_width","align":"start","children":[{"type":"object","name":"Spacer","id":"p1122","attributes":{"name":"HSpacer01188","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"p1121"},{"id":"p1119"},{"id":"p1120"}],"margin":0,"sizing_mode":"stretch_width","align":"start"}},{"type":"object","name":"Figure","id":"p1130","attributes":{"width":700,"height":500,"margin":[5,10],"sizing_mode":"fixed","align":"start","x_range":{"type":"object","name":"Range1d","id":"p1123","attributes":{"tags":[[["Importance","Importance",null]],[]],"end":0.19836115474994187,"reset_start":0.0,"reset_end":0.19836115474994187}},"y_range":{"type":"object","name":"FactorRange","id":"p1124","attributes":{"tags":[[["Feature","Feature",null]],{"type":"map","entries":[["invert_yaxis",true],["autorange",false]]}],"factors":["TRACTCE_004205","TRACTCE_002702","TRACTCE_003400","TRACTCE_002710","TRACTCE_006714","TRACTCE_001208","TRACTCE_000143","TRACTCE_009065","TRACTCE_006717","TRACTCE_980500","TRACTCE_004403","TRACTCE_005600","TRACTCE_007103","TRACTCE_001008","TRACTCE_004901","TRACTCE_006715","TRACTCE_003710","TRACTCE_006603","TRACTCE_004703","TRACTCE_004303","TRACTCE_006720","TRACTCE_001302","logDistTrash","logDistAbandoned","logDistOffender","MedHHInc","logDistShoreline","logDistParks","rating","logDistMetro"]}},"x_scale":{"type":"object","name":"LinearScale","id":"p1140"},"y_scale":{"type":"object","name":"CategoricalScale","id":"p1141"},"title":{"type":"object","name":"Title","id":"p1133","attributes":{"text_color":"black","text_font_size":"12pt"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1166","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1157","attributes":{"selected":{"type":"object","name":"Selection","id":"p1158","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1159"},"data":{"type":"map","entries":[["Feature",["logDistMetro","rating","logDistParks","logDistShoreline","MedHHInc","logDistOffender","logDistAbandoned","logDistTrash","TRACTCE_001302","TRACTCE_006720","TRACTCE_004303","TRACTCE_004703","TRACTCE_006603","TRACTCE_003710","TRACTCE_006715","TRACTCE_004901","TRACTCE_001008","TRACTCE_007103","TRACTCE_005600","TRACTCE_004403","TRACTCE_980500","TRACTCE_006717","TRACTCE_009065","TRACTCE_000143","TRACTCE_001208","TRACTCE_006714","TRACTCE_002710","TRACTCE_003400","TRACTCE_002702","TRACTCE_004205"]],["Importance",{"type":"ndarray","array":{"type":"bytes","data":"cXjAgy4Vxz/1/613Sv7DPyPxsrOLlcM/zlt/h9RlwT/2L5yQWB+/P6Hejb1lALY/9jSqnZEZqz8ZKiBI5AemP70Yk2ziV5Q/pElp6ao5lD/HO+K1zt2DPyO4DbHlC3w/Vn6jVJSUYj+JUc7g/lJiPzgnYfvQGGI/Q4tXcQDJWz81vm7UKEtXPyGjK7iTmlM/Dx+GjiEmUT9kcrbRa388P/aZpfR1OTo/LI12uqrjOT9f00Vd9ko5P1Vf80XtkDc/dC7JmeVwLD8v44lGEJEjPx8RLiSITSA/kr4TRUFoEj/dXfUU1k4SP13++T+4HxA/"},"shape":[30],"dtype":"float64","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1167","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1168"}}},"glyph":{"type":"object","name":"HBar","id":"p1163","attributes":{"tags":["apply_ranges"],"y":{"type":"field","field":"Feature"},"height":{"type":"value","value":0.8},"right":{"type":"field","field":"Importance"},"fill_color":{"type":"value","value":"#30a2da"},"hatch_color":{"type":"value","value":"#30a2da"}}},"selection_glyph":{"type":"object","name":"HBar","id":"p1169","attributes":{"tags":["apply_ranges"],"y":{"type":"field","field":"Feature"},"height":{"type":"value","value":0.8},"left":{"type":"value","value":0},"right":{"type":"field","field":"Importance"},"line_color":{"type":"value","value":"black"},"line_alpha":{"type":"value","value":1.0},"line_width":{"type":"value","value":1},"line_join":{"type":"value","value":"bevel"},"line_cap":{"type":"value","value":"butt"},"line_dash":{"type":"value","value":[]},"line_dash_offset":{"type":"value","value":0},"fill_color":{"type":"value","value":"#30a2da"},"fill_alpha":{"type":"value","value":1.0},"hatch_color":{"type":"value","value":"#30a2da"},"hatch_alpha":{"type":"value","value":1.0},"hatch_scale":{"type":"value","value":12.0},"hatch_pattern":{"type":"value","value":null},"hatch_weight":{"type":"value","value":1.0}}},"nonselection_glyph":{"type":"object","name":"HBar","id":"p1164","attributes":{"tags":["apply_ranges"],"y":{"type":"field","field":"Feature"},"height":{"type":"value","value":0.8},"right":{"type":"field","field":"Importance"},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"value","value":"#30a2da"},"fill_alpha":{"type":"value","value":0.1},"hatch_color":{"type":"value","value":"#30a2da"},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"HBar","id":"p1165","attributes":{"tags":["apply_ranges"],"y":{"type":"field","field":"Feature"},"height":{"type":"value","value":0.8},"right":{"type":"field","field":"Importance"},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"value","value":"#30a2da"},"fill_alpha":{"type":"value","value":0.2},"hatch_color":{"type":"value","value":"#30a2da"},"hatch_alpha":{"type":"value","value":0.2}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1139","attributes":{"tools":[{"type":"object","name":"WheelZoomTool","id":"p1128","attributes":{"tags":["hv_created"],"zoom_together":"none"}},{"type":"object","name":"HoverTool","id":"p1129","attributes":{"tags":["hv_created"],"renderers":[{"id":"p1166"}],"tooltips":[["Feature","@{Feature}"],["Importance","@{Importance}"]]}},{"type":"object","name":"SaveTool","id":"p1152"},{"type":"object","name":"PanTool","id":"p1153"},{"type":"object","name":"BoxZoomTool","id":"p1154","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1155","attributes":{"syncable":false,"level":"overlay","visible":false,"left_units":"canvas","right_units":"canvas","bottom_units":"canvas","top_units":"canvas","line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5}}}},{"type":"object","name":"ResetTool","id":"p1156"}],"active_drag":{"id":"p1153"},"active_scroll":{"id":"p1128"}}},"left":[{"type":"object","name":"CategoricalAxis","id":"p1147","attributes":{"ticker":{"type":"object","name":"CategoricalTicker","id":"p1148"},"formatter":{"type":"object","name":"CategoricalTickFormatter","id":"p1149"},"axis_label":"Feature","major_label_policy":{"type":"object","name":"AllLabels","id":"p1150"}}}],"below":[{"type":"object","name":"LinearAxis","id":"p1142","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1143","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1144"},"axis_label":"Importance","major_label_policy":{"type":"object","name":"AllLabels","id":"p1145"}}}],"center":[{"type":"object","name":"Grid","id":"p1146","attributes":{"axis":{"id":"p1142"},"grid_line_color":null}},{"type":"object","name":"Grid","id":"p1151","attributes":{"dimension":1,"axis":{"id":"p1147"},"grid_line_color":null}}],"min_border_top":10,"min_border_bottom":10,"min_border_left":10,"min_border_right":10,"output_backend":"webgl"}},{"type":"object","name":"Spacer","id":"p1171","attributes":{"name":"HSpacer01191","stylesheets":["\n:host(.pn-loading.pn-arc):before, .pn-loading.pn-arc:before {\n  background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46IGF1dG87IGJhY2tncm91bmQ6IG5vbmU7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYzNjM2MzIiBzdHJva2Utd2lkdGg9IjEwIiByPSIzNSIgc3Ryb2tlLWRhc2hhcnJheT0iMTY0LjkzMzYxNDMxMzQ2NDE1IDU2Ljk3Nzg3MTQzNzgyMTM4Ij4gICAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiBkdXI9IjFzIiB2YWx1ZXM9IjAgNTAgNTA7MzYwIDUwIDUwIiBrZXlUaW1lcz0iMDsxIj48L2FuaW1hdGVUcmFuc2Zvcm0+ICA8L2NpcmNsZT48L3N2Zz4=\");\n  background-size: auto calc(min(50%, 400px));\n}",{"id":"p1121"},{"id":"p1119"},{"id":"p1120"}],"margin":0,"sizing_mode":"stretch_width","align":"start"}}]}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"mode","kind":"Any","default":"warn"},{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationAreaBase1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]}]}};
+  var render_items = [{"docid":"bb111862-7883-49fb-af99-84a49d986a62","roots":{"p1118":"bc443a8d-7a6e-469d-b41a-b49fe5d8ae5f"},"root_ids":["p1118"]}];
+  var docs = Object.values(docs_json)
+  if (!docs) {
+    return
+  }
+  const py_version = docs[0].version.replace('rc', '-rc.').replace('.dev', '-dev.')
+  const is_dev = py_version.indexOf("+") !== -1 || py_version.indexOf("-") !== -1
+  function embed_document(root) {
+    var Bokeh = get_bokeh(root)
+    Bokeh.embed.embed_items_notebook(docs_json, render_items);
+    for (const render_item of render_items) {
+      for (const root_id of render_item.root_ids) {
+    const id_el = document.getElementById(root_id)
+    if (id_el.children.length && (id_el.children[0].className === 'bk-root')) {
+      const root_el = id_el.children[0]
+      root_el.id = root_el.id + '-rendered'
+    }
+      }
+    }
+  }
+  function get_bokeh(root) {
+    if (root.Bokeh === undefined) {
+      return null
+    } else if (root.Bokeh.version !== py_version && !is_dev) {
+      if (root.Bokeh.versions === undefined || !root.Bokeh.versions.has(py_version)) {
+    return null
+      }
+      return root.Bokeh.versions.get(py_version);
+    } else if (root.Bokeh.version === py_version) {
+      return root.Bokeh
+    }
+    return null
+  }
+  function is_loaded(root) {
+    var Bokeh = get_bokeh(root)
+    return (Bokeh != null && Bokeh.Panel !== undefined)
+  }
+  if (is_loaded(root)) {
+    embed_document(root);
+  } else {
+    var attempts = 0;
+    var timer = setInterval(function(root) {
+      if (is_loaded(root)) {
+        clearInterval(timer);
+        embed_document(root);
+      } else if (document.readyState == "complete") {
+        attempts++;
+        if (attempts > 200) {
+          clearInterval(timer);
+      var Bokeh = get_bokeh(root)
+      if (Bokeh == null || Bokeh.Panel == null) {
+            console.warn("Panel: ERROR: Unable to run Panel code because Bokeh or Panel library is missing");
+      } else {
+        console.warn("Panel: WARNING: Attempting to render but not all required libraries could be resolved.")
+        embed_document(root)
+      }
+        }
+      }
+    }, 25, root)
+  }
+})(window);</script>
+</div>
+</div>
+<div class="cell" data-execution_count="44">
+<div class="cell-output cell-output-display">
+<p><img src="RegressionAnalysis_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© CC-Sihan Ren, 2023</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/RachelRen-RSH/550-final-quarto-website/blob/main/analysis/RegressionAnalysis.ipynb" class="toc-action">View source</a></p></div></div></div>
+    <div class="nav-footer-right">This page is built with ❤️ and <a href="https://quarto.org/">Quarto</a>.</div>
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -33,8 +33,8 @@ website:
         text: Methods
       - section: Results
         contents:
-          - analysis/Data Visualizations.ipynb
-          - analysis/Regression Analysis.ipynb
+          - analysis/Exploratory_Analysis.ipynb
+          - analysis/RegressionAnalysis.ipynb
       - href: Limitations.qmd
         text: Limitations
       - href: References.qmd

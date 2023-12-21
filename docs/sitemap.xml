@@ -2,38 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://rachelren-rsh.github.io/550-final-quarto-website/References.html</loc>
-    <lastmod>2023-12-19T22:23:43.392Z</lastmod>
+    <lastmod>2023-12-21T02:15:18.706Z</lastmod>
   </url>
   <url>
     <loc>https://rachelren-rsh.github.io/550-final-quarto-website/Methods.html</loc>
-    <lastmod>2023-12-19T22:23:42.861Z</lastmod>
+    <lastmod>2023-12-21T02:15:18.153Z</lastmod>
   </url>
   <url>
-    <loc>https://rachelren-rsh.github.io/550-final-quarto-website/analysis/Regression Analysis.html</loc>
-    <lastmod>2023-12-19T22:23:42.251Z</lastmod>
-  </url>
-  <url>
-    <loc>https://rachelren-rsh.github.io/550-final-quarto-website/analysis/index.html</loc>
-    <lastmod>2023-12-19T22:23:38.452Z</lastmod>
-  </url>
-  <url>
-    <loc>https://rachelren-rsh.github.io/550-final-quarto-website/analysis/3-altair-hvplot.html</loc>
-    <lastmod>2023-12-19T22:23:37.696Z</lastmod>
-  </url>
-  <url>
-    <loc>https://rachelren-rsh.github.io/550-final-quarto-website/analysis/Data Visualizations.html</loc>
-    <lastmod>2023-12-19T22:23:38.190Z</lastmod>
+    <loc>https://rachelren-rsh.github.io/550-final-quarto-website/analysis/Exploratory_Analysis.html</loc>
+    <lastmod>2023-12-21T02:15:17.545Z</lastmod>
   </url>
   <url>
     <loc>https://rachelren-rsh.github.io/550-final-quarto-website/analysis/1-python-code-blocks.html</loc>
-    <lastmod>2023-12-19T22:23:41.852Z</lastmod>
+    <lastmod>2023-12-21T02:15:12.653Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rachelren-rsh.github.io/550-final-quarto-website/analysis/RegressionAnalysis.html</loc>
+    <lastmod>2023-12-21T02:15:08.154Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rachelren-rsh.github.io/550-final-quarto-website/analysis/3-altair-hvplot.html</loc>
+    <lastmod>2023-12-21T02:15:07.745Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rachelren-rsh.github.io/550-final-quarto-website/analysis/index.html</loc>
+    <lastmod>2023-12-21T02:15:08.435Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rachelren-rsh.github.io/550-final-quarto-website/analysis/Final.html</loc>
+    <lastmod>2023-12-21T02:15:17.063Z</lastmod>
   </url>
   <url>
     <loc>https://rachelren-rsh.github.io/550-final-quarto-website/index.html</loc>
-    <lastmod>2023-12-19T22:23:42.560Z</lastmod>
+    <lastmod>2023-12-21T02:15:17.844Z</lastmod>
   </url>
   <url>
     <loc>https://rachelren-rsh.github.io/550-final-quarto-website/Limitations.html</loc>
-    <lastmod>2023-12-19T22:23:43.124Z</lastmod>
+    <lastmod>2023-12-21T02:15:18.434Z</lastmod>
   </url>
 </urlset>
