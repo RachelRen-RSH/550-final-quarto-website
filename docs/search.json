@@ -39,14 +39,14 @@
     "href": "Methods.html#data-visualization",
     "title": "Methods",
     "section": "Data Visualization",
-    "text": "Data Visualization"
+    "text": "Data Visualization\nWe visualized our data in separate ways from Matplot, Seaborn and Altair libraries to create interactive maps, histograms and scatterplots, showing the relationship between the predictors and hotel price."
   },
   {
     "objectID": "Methods.html#regression-analysis",
     "href": "Methods.html#regression-analysis",
     "title": "Methods",
     "section": "Regression Analysis",
-    "text": "Regression Analysis"
+    "text": "Regression Analysis\nFor our regression analysis, we used random-forest regression by separating the predictors into categorical and continuous variables and used one-hot encoder to transform them. We split our dataset by 7:3 as training and test set. To show the model’s performance, we calculated the R-squared score and visualized the median percent error."
   },
   {
     "objectID": "analysis/Exploratory_Analysis.html",

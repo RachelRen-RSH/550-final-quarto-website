@@ -22,9 +22,10 @@ It is possible that a hotel's price is related with the wealth level of the belo
 Spatial features of parks, shorelines, matro stations, trash complaints, abandoned cars and properties and sexual offenders are all retrieved from County of Miami-Dade ArcGIS Open Data Portal. We performed a nearest-neighborhood analysis to calculate the distance from each hotel to its nearest neighbor in the these datasets. We did a logarithm of the distances to normalize the distribution of distance values.
 
 ## Data Visualization
+We visualized our data in separate ways from Matplot, Seaborn and Altair libraries to create interactive maps, histograms and scatterplots, showing the relationship between the predictors and hotel price.
 
 ## Regression Analysis
-
+For our regression analysis, we used random-forest regression by separating the predictors into categorical and continuous variables and used one-hot encoder to transform them. We split our dataset by 7:3 as training and test set. To show the model's performance, we calculated the R-squared score and visualized the median percent error.
 
 
 
